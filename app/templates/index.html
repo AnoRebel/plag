@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+  <div onload="scrollBottom()" class="flex flex-grow flex-col overflow-hidden justify-center items-center h-screen w-full">
+    <h1 class="text-grey-darkest text-5xl text-white my-4">Plag - iarize</h1>
+    <p class="lg:px-24 text-center text-red-600 text-3xl">WARNING!: Scraping data is generally not allowed, only scrape sites you have been given consent to!</p>
+    <p class="text-green-500 text-bold my-2">Just enter a link and get some data scraped from it.</p>
+    <div class="loader hidden">
+        <span></span>
+        <span></span>
+    </div>
+    <div class="form rounded shadow p-6 m-4 w-full lg:w-3/4">
+      <div class="mb-4">
+        <form name="plag" id="plag" method="POST" action="{{ url_for('url') }}" class="flex mt-4">
+          <input name="url" type="url"
+            class="shadow appearance-none border rounded w-full py-2 px-3 mr-4 text-grey-darker"
+            placeholder="Enter URL"
+          />
+          <button type="submit"
+            class="flex-no-shrink p-2 border-2 rounded text-teal border-teal hover:bg-teal-400 bg-teal-800"
+          >
+            Go
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

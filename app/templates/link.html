@@ -1,0 +1,125 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+Plag - iarized!
+{% endblock %}
+
+{% block content %}
+
+	{% if data.data.code > 200 < 500 %}
+		<div onload="scrollTop()" class="w-full h-full flex items-center justify-center">
+			<label for="error" class="text-center block text-gray-300 h-32 text-5xl font-black">
+				Nothing to Plagiarise
+	        </label>
+	    </div>
+	{% else %}
+		<div onload="scrollTop()" class="w-full h-full flex flex-col items-center overflow-x-hidden">
+
+			<label for="title" class="text-center block text-gray-300 h-32 text-5xl font-black mt-4">
+	        	{{ data.data.title }}
+	        </label>
+
+	        <label for="images" class="text-center block text-gray-500 text-lg font-bold mb-6">
+	        	Images
+	        </label>
+
+	        {% if data.data.images == {} %}
+				<label for="images" class="text-center block text-gray-500 text-4xl font-bold mb-6">
+		        	No Images
+		        </label>
+			{% else %}
+		        <div name="images" class="grid grid-flow-row grid-cols-3 gap-4">
+					{% for alt, src in data.data.images.items() %}
+						<div class="max-w-sm rounded overflow-hidden shadow-lg h-56 w-56">
+						  <a href="{{ src }}">
+							<img class="w-full h-full" src="{{ src }}" alt="{{ alt }}" />
+						  </a>
+						  <div class="px-6 py-2">
+						    <div class="font-bold text-xl mb-1">{{ alt }}</div>
+						  </div>
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}
+
+			<label for="videos" class="text-center block text-gray-500 text-lg font-bold my-6">
+	        	Videos
+	        </label>
+
+	        {% if data.data.videos == [] %}
+	        	<label for="images" class="text-center block text-gray-500 text-4xl font-bold mb-6">
+		        	No Videos
+		        </label>
+	        {% else %}
+				<div name="videos" class="grid grid-flow-row grid-cols-3 gap-4">
+					{% for src in data.data.videos %}
+						<div class="max-w-sm rounded overflow-hidden shadow-lg h-56 w-56">
+						  <video class="w-full h-full" src="{{ src }}" controls>
+							  Sorry, your browser doesn't support HTML5 <code>video</code>, but you can
+							  download this video from the <a href="https://archive.org/details/Popeye_forPresident" target="_blank">Internet Archive</a>.
+						  </video>
+						  <div class="px-2 py-1">
+						    <div class="font-bold text-xl mb-1">{{ src }}</div>
+						  </div>
+						</div>
+					{% endfor %}
+				</div>
+			{% endif %}
+
+			<label for="metas" class="text-center block text-gray-500 text-lg font-bold my-6">
+	        	Meta Data
+	        </label>
+
+	        {% if data.data.metas == {} %}
+	        	<label for="images" class="text-center block text-gray-500 text-4xl font-bold mb-6">
+		        	No Meta Data
+		        </label>
+	        {% else %}
+				<table name="metas" class="table-fixed">
+				  <thead>
+				    <tr class="bg-gray-600">
+				      <th class="text-white w-1/3 px-4 py-2">Name</th>
+				      <th class="text-white w-2/3 px-4 py-2">Content</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  {% for name, content in data.data.metas.items() %}
+				    <tr class="bg-gray-100">
+				      <td class="border px-4 py-2">{{ name }}</td>
+				      <td class="border px-4 py-2">{{ content }}</td>
+				    </tr>
+				  {% endfor %}
+				  </tbody>
+				</table>
+			{% endif %}
+
+			<label for="links" class="text-center block text-gray-500 text-lg font-bold my-6">
+	        	Links
+	        </label>
+
+	        {% if data.data.links == {} %}
+	        	<label for="images" class="text-center block text-gray-500 text-4xl font-bold mb-6">
+		        	No Links
+		        </label>
+	        {% else %}
+				<table name="links" class="table-fixed">
+				  <thead>
+				    <tr class="bg-gray-600">
+				      <th class="text-white w-1/3 px-4 py-2">Text</th>
+				      <th class="text-white w-2/3 px-4 py-2">Link</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  {% for href, text in data.data.links.items() %}
+				    <tr class="bg-gray-100">
+				      <td class="border px-4 py-2">{{ text }}</td>
+				      <td class="border px-4 py-2"><a href="{{ href }}">{{ href }}</a></td>
+				    </tr>
+				  {% endfor %}
+				  </tbody>
+				</table>
+			{% endif %}
+		</div>
+	{% endif %}
+
+{% endblock content %}

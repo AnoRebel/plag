@@ -22,6 +22,7 @@ def url():
 		for meta in soup.find_all('meta'):
 			metas[meta.get('name')] = meta.get('description')
 			metas[meta.get('name')] = meta.get('content')
+			metas[meta.get('property')] = meta.get('content')
 
 		for image in soup.find_all('img'):
 			images[image.get('alt')] = urljoin(url, image.get('src'))
